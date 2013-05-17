@@ -1,0 +1,7 @@
+cron:
+- description: push server keepalive
+  url: /pushping
+  schedule: every 1 minutes
+- description: clear old messages and send pending messages in the outbox
+  url: /purge
+  schedule: every 1 minutes

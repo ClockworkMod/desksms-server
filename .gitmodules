@@ -1,0 +1,6 @@
+[submodule "mapreduce"]
+	path = mapreduce
+	url = git@github.com:koush/appengine-mapreduce.git
+[submodule "site"]
+	path = site
+	url = git@github.com:ClockworkMod/desksms-nodejs.git

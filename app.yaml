@@ -1,0 +1,71 @@
+application: desksms
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+default_expiration: "10m"
+
+inbound_services:
+- xmpp_message
+- xmpp_subscribe
+- mail
+#- xmpp_presence
+
+skip_files:
+- ^(.*/)?app\.yaml
+- ^(.*/)?app\.yml
+- ^(.*/)?index\.yaml
+- ^(.*/)?index\.yml
+- ^(.*/)?#.*#
+- ^(.*/)?.*~
+- ^(.*/)?.*\.py[co]
+- ^(.*/)?.*/RCS/.*
+- ^(.*/)?\..*
+- site/node_modules
+
+handlers:
+- url: /mapreduce/pipeline/images
+  static_dir: mapreduce/lib/pipeline/ui/images
+- url: /mapreduce(/.*)?
+  script: mapreducey.app
+  login: admin
+#- url: /test
+#  script: main.py
+- url: /pushping
+  script: main.app
+  login: admin
+- url: /refer
+  script: main.app
+- url: /purge
+  script: main.app
+  login: admin
+- url: /tickle
+  script: main.app
+- url: /register
+  script: main.app
+- url: /oauth
+  script: main.app
+- url: /_ah/xmpp.*
+  login: required
+  script: main.app
+- url: /_ah/mail.*
+  login: admin
+  script: main.app
+- url: /api.*
+  script: main.app
+- url: /login
+  script: main.app
+  login: required
+- url: /
+  static_files: site/public/index.html
+  upload: site/public/index.html
+- url: /images
+  static_dir: site/public/images
+  expiration: "14d"
+- url: /notifications
+  static_dir: site/public/notifications
+  expiration: "14d"
+- url: /
+  static_dir: site/public
+

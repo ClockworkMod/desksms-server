@@ -1,0 +1,22 @@
+mapreduce:
+- name: Purge Old SMS
+  mapper:
+    input_reader: mapreduce.input_readers.DatastoreInputReader
+    handler: purge.purge_sms
+    params:
+    - name: entity_kind
+      default: main.Sms
+- name: Registration Stats
+  mapper:
+    input_reader: mapreduce.input_readers.DatastoreInputReader
+    handler: stats.get_registration_stats
+    params:
+    - name: entity_kind
+      default: main.User
+- name: Email Off
+  mapper:
+    input_reader: mapreduce.input_readers.DatastoreInputReader
+    handler: stats.force_email_off
+    params:
+    - name: entity_kind
+      default: main.User
